@@ -11,8 +11,10 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: true,
   },
-  output: 'standalone', // Для Docker
+  output: 'export',
+  distDir: 'out',
 };
 
 module.exports = nextConfig; 

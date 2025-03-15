@@ -1,42 +1,35 @@
-FROM node:18-alpine AS base
-
-# Установка зависимостей
-FROM base AS deps
+# Этап сборки
+FROM node:18-alpine AS builder
 WORKDIR /app
 
-# Копирование файлов package.json и package-lock.json (если есть)
+# Копируем package.json и package-lock.json
 COPY package.json package-lock.json* ./
 RUN npm ci
 
-# Сборка приложения
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+# Копируем исходники
 COPY . .
 
-# Сборка приложения
+# Собираем Next.js приложение
 RUN npm run build
 
-# Запуск приложения
-FROM base AS runner
-WORKDIR /app
+# Этап запуска
+FROM nginx:alpine
 
-ENV NODE_ENV production
+# Копируем конфигурацию Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Создание пользователя nextjs
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# Копируем собранное приложение из этапа сборки
+COPY --from=builder /app/out /usr/share/nginx/html
 
-# Копирование необходимых файлов
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Явно копируем папку с изображениями в правильное место
+COPY --from=builder /app/public/images /usr/share/nginx/html/images
 
-USER nextjs
+# Устанавливаем правильные права на изображения
+RUN chmod -R 644 /usr/share/nginx/html/images && \
+    find /usr/share/nginx/html/images -type d -exec chmod 755 {} \;
 
-EXPOSE 3000
+# Открываем порт 80
+EXPOSE 80
 
-ENV PORT 3000
-ENV HOSTNAME "0.0.0.0"
-
-CMD ["node", "server.js"] 
+# Запускаем Nginx
+CMD ["nginx", "-g", "daemon off;"] 
