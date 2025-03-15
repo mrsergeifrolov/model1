@@ -15,8 +15,8 @@ const nextConfig = {
   },
   // Включаем статический экспорт только для продакшн сборки
   // Для локальной разработки закомментируйте следующие строки
-  // output: 'export',
-  // distDir: 'out',
+  output: 'export',
+  distDir: 'out',
 };
 
 module.exports = nextConfig; 
