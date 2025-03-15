@@ -128,12 +128,8 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
           <span className="text-sm text-left" style={{ color: 'rgb(153, 153, 153)' }}>88cm / 34.6"</span>
         </div>
         <div className="flex justify-center">
-          <span className="w-24 font-light uppercase text-sm text-right pr-3" style={{ color: 'rgb(179, 179, 179)' }}>DRESS</span>
-          <span className="text-sm text-left" style={{ color: 'rgb(153, 153, 153)' }}>36EU / 6US / 8UK</span>
-        </div>
-        <div className="flex justify-center">
           <span className="w-24 font-light uppercase text-sm text-right pr-3" style={{ color: 'rgb(179, 179, 179)' }}>HAIR</span>
-          <span className="text-sm text-left" style={{ color: 'rgb(153, 153, 153)' }}>Dark chestnut</span>
+          <span className="text-sm text-left" style={{ color: 'rgb(153, 153, 153)' }}>Dark brown</span>
         </div>
         <div className="flex justify-center">
           <span className="w-24 font-light uppercase text-sm text-right pr-3" style={{ color: 'rgb(179, 179, 179)' }}>EYES</span>
@@ -248,12 +244,12 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
           {index === 0 ? (
             <ModelParams />
           ) : (
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full bg-black flex items-center justify-center">
               <Image
                 src={pageImages[0].src}
                 alt={pageImages[0].alt}
                 fill
-                className="object-cover object-center"
+                className="object-contain object-center"
               />
             </div>
           )}
@@ -261,14 +257,14 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
         
         {/* Правая половина */}
         <div 
-          className="w-1/2 h-full relative cursor-finger-right" 
+          className="w-1/2 h-full relative cursor-finger-right bg-black flex items-center justify-center" 
           onClick={handleRightClick}
         >
           <Image
             src={pageImages.length > 1 ? pageImages[1].src : pageImages[0].src}
             alt={pageImages.length > 1 ? pageImages[1].alt : pageImages[0].alt}
             fill
-            className="object-cover object-center"
+            className="object-contain object-center"
           />
         </div>
       </div>

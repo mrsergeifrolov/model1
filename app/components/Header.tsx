@@ -20,8 +20,8 @@ const Header = () => {
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black shadow-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="/" style={{ color: 'rgb(153, 153, 153)' }} className="text-xl uppercase tracking-widest font-light">
-          Sagadeeva Alina
+        <Link href="/" style={{ color: 'white' }} className="text-2xl uppercase tracking-widest font-light">
+          MODEL | Sagadeeva Alina
         </Link>
         <nav>
           <ul className="flex space-x-6">
