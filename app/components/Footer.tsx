@@ -14,10 +14,10 @@ const Footer = () => {
             <p className="text-sm" style={{ color: 'rgb(153, 153, 153)' }}>© 2023 Sagadeeva Alina Albertovna. All rights reserved.</p>
           </div>
           <div className="flex space-x-6">
-            <Link href="https://instagram.com/alina_sagadeeva" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(153, 153, 153)' }} className="hover:opacity-80 transition-colors">
+            <Link href="https://www.instagram.com/saga_eva" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(153, 153, 153)' }} className="hover:opacity-80 transition-colors">
               <FaInstagram size={32} />
             </Link>
-            <Link href="https://wa.me/+79123456789" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(153, 153, 153)' }} className="hover:opacity-80 transition-colors">
+            <Link href="https://wa.me/+79818598470" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(153, 153, 153)' }} className="hover:opacity-80 transition-colors">
               <FaWhatsapp size={32} />
             </Link>
           </div>

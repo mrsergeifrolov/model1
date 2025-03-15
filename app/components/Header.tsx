@@ -26,12 +26,12 @@ const Header = () => {
         <nav>
           <ul className="flex space-x-6">
             <li>
-              <a href="https://instagram.com/alina_sagadeeva" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(153, 153, 153)' }} className="hover:opacity-80 transition-colors">
+              <a href="https://www.instagram.com/saga_eva" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(153, 153, 153)' }} className="hover:opacity-80 transition-colors">
                 <FiInstagram size={24} />
               </a>
             </li>
             <li>
-              <a href="https://wa.me/+79123456789" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(153, 153, 153)' }} className="hover:opacity-80 transition-colors">
+              <a href="https://wa.me/+79818598470" target="_blank" rel="noopener noreferrer" style={{ color: 'rgb(153, 153, 153)' }} className="hover:opacity-80 transition-colors">
                 <FaWhatsapp size={24} />
               </a>
             </li>

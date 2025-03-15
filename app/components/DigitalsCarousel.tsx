@@ -15,6 +15,8 @@ interface DigitalsCarouselProps {
 
 const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [prevPage, setPrevPage] = useState(0);
+  const [direction, setDirection] = useState<'left' | 'right' | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState<Record<string, boolean>>({});
   const [showParams, setShowParams] = useState(true);
@@ -63,32 +65,46 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
   // Проверяем, загружены ли все изображения
   const areImagesLoaded = images.every(img => imagesLoaded[img.src]);
 
-  // Простая навигация без сложной анимации
-  const navigateToPage = (targetPage: number) => {
+  // Навигация с анимацией выкатывания
+  const navigateToPage = (targetPage: number, moveDirection: 'left' | 'right') => {
     if (isAnimating) return;
     
     setIsAnimating(true);
+    setDirection(moveDirection);
+    setPrevPage(currentPage);
     
     // Сразу скрываем параметры модели при переходе с первой страницы
     if (currentPage === 0) {
       setShowParams(false);
     }
     
-    // Задержка перед изменением страницы, чтобы анимация успела завершиться
+    // Изменяем страницу сразу, остальное обрабатываем через CSS-анимации
+    setCurrentPage(targetPage);
+    
+    // После завершения анимации
     setTimeout(() => {
-      setCurrentPage(targetPage);
       setIsAnimating(false);
-    }, 300);
+      setDirection(null);
+    }, 500); // Время анимации
   };
 
   const goToPrevious = () => {
     const targetPage = currentPage === 0 ? totalPages - 1 : currentPage - 1;
-    navigateToPage(targetPage);
+    navigateToPage(targetPage, 'left');
   };
 
   const goToNext = () => {
     const targetPage = currentPage === totalPages - 1 ? 0 : currentPage + 1;
-    navigateToPage(targetPage);
+    navigateToPage(targetPage, 'right');
+  };
+
+  // Обработчик для точек навигации
+  const handleDotClick = (index: number) => {
+    if (isAnimating || currentPage === index || !areImagesLoaded) return;
+    
+    // Определяем направление движения
+    const moveDirection = index > currentPage ? 'right' : 'left';
+    navigateToPage(index, moveDirection);
   };
 
   // Параметры модели (всегда отображаются слева на первой странице)
@@ -131,10 +147,10 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
       
       {/* Социальные сети */}
       <div className="mt-10 flex space-x-6 justify-center">
-        <a href="https://instagram.com/alina_sagadeeva" target="_blank" rel="noopener noreferrer" className="transition-colors hover:opacity-80" style={{ color: 'rgb(179, 179, 179)' }}>
+        <a href="https://www.instagram.com/saga_eva" target="_blank" rel="noopener noreferrer" className="transition-colors hover:opacity-80" style={{ color: 'rgb(179, 179, 179)' }}>
           <FaInstagram size={32} />
         </a>
-        <a href="https://wa.me/+79123456789" target="_blank" rel="noopener noreferrer" className="transition-colors hover:opacity-80" style={{ color: 'rgb(179, 179, 179)' }}>
+        <a href="https://wa.me/+79818598470" target="_blank" rel="noopener noreferrer" className="transition-colors hover:opacity-80" style={{ color: 'rgb(179, 179, 179)' }}>
           <FaWhatsapp size={32} />
         </a>
       </div>
@@ -156,21 +172,75 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
     }
   };
 
-  // Обработчик для точек навигации
-  const handleDotClick = (index: number) => {
-    if (isAnimating || currentPage === index || !areImagesLoaded) return;
-    navigateToPage(index);
+  // Определяем положение страницы в зависимости от её номера и состояния анимации
+  const getPageInitialPosition = (index: number) => {
+    if (!isAnimating) {
+      if (index === currentPage) {
+        return { transform: 'translateX(0)', zIndex: 10, opacity: 1 };
+      } else {
+        // Скрываем неактивные страницы
+        return { transform: index < currentPage ? 'translateX(-100%)' : 'translateX(100%)', zIndex: 0, opacity: 0 };
+      }
+    }
+    
+    if (isAnimating && direction === 'right') {
+      // Анимация вправо
+      if (index === currentPage) {
+        // Новая страница входит справа
+        return { 
+          transform: 'translateX(0)', 
+          zIndex: 10, 
+          opacity: 1,
+          transition: 'transform 500ms ease-in-out, opacity 500ms ease-in-out',
+          animation: 'slide-in-right 500ms forwards' 
+        };
+      } else if (index === prevPage) {
+        // Текущая страница уходит влево
+        return { 
+          transform: 'translateX(-100%)', 
+          zIndex: 5, 
+          opacity: 1,
+          transition: 'transform 500ms ease-in-out, opacity 500ms ease-in-out',
+          animation: 'slide-out-left 500ms forwards' 
+        };
+      }
+    } else if (isAnimating && direction === 'left') {
+      // Анимация влево
+      if (index === currentPage) {
+        // Новая страница входит слева
+        return { 
+          transform: 'translateX(0)', 
+          zIndex: 10, 
+          opacity: 1,
+          transition: 'transform 500ms ease-in-out, opacity 500ms ease-in-out',
+          animation: 'slide-in-left 500ms forwards' 
+        };
+      } else if (index === prevPage) {
+        // Текущая страница уходит вправо
+        return { 
+          transform: 'translateX(100%)', 
+          zIndex: 5, 
+          opacity: 1,
+          transition: 'transform 500ms ease-in-out, opacity 500ms ease-in-out',
+          animation: 'slide-out-right 500ms forwards' 
+        };
+      }
+    }
+    
+    // Все остальные страницы скрыты
+    return { transform: index < currentPage ? 'translateX(-100%)' : 'translateX(100%)', zIndex: 0, opacity: 0 };
   };
 
   // Создаем массив всех страниц для отображения
   const pages = Array.from({ length: totalPages }).map((_, index) => {
     const pageImages = getPageImages(index);
+    const style = getPageInitialPosition(index);
+    
     return (
       <div 
         key={index}
-        className={`absolute inset-0 flex transition-opacity duration-300 ease-in-out ${
-          currentPage === index ? 'opacity-100 z-10' : 'opacity-0 z-0'
-        }`}
+        className="absolute inset-0 flex"
+        style={style}
         data-testid={`page-${index}`}
       >
         {/* Левая половина */}
@@ -213,6 +283,28 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
         </div>
       )}
+      
+      <style jsx global>{`
+        @keyframes slide-in-right {
+          from { transform: translateX(100%); }
+          to { transform: translateX(0); }
+        }
+        
+        @keyframes slide-out-left {
+          from { transform: translateX(0); }
+          to { transform: translateX(-100%); }
+        }
+        
+        @keyframes slide-in-left {
+          from { transform: translateX(-100%); }
+          to { transform: translateX(0); }
+        }
+        
+        @keyframes slide-out-right {
+          from { transform: translateX(0); }
+          to { transform: translateX(100%); }
+        }
+      `}</style>
       
       <div className="relative h-full w-full overflow-hidden">
         {/* Отображаем все страницы */}
