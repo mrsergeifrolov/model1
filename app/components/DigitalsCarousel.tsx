@@ -418,7 +418,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
   // Мобильный макет
   if (isMobile) {
     return (
-      <div className="flex flex-col h-full pt-16 bg-black mobile-carousel-container overflow-y-auto w-full overflow-x-hidden">
+      <div className="flex flex-col h-full pt-16 bg-black mobile-carousel-container w-full overflow-x-hidden">
         {/* Параметры модели (на мобильных сверху) */}
         <div className="w-full">
           <ModelParams />

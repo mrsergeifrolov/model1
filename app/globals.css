@@ -35,6 +35,7 @@ body {
   letter-spacing: 0.02em;
   font-weight: 300;
   overflow-x: hidden; /* Убираем только горизонтальный скролл */
+  overflow-y: auto; /* Явно включаем вертикальный скролл */
   height: 100vh;
 }
 
