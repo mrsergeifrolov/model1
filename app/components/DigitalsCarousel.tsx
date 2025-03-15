@@ -418,7 +418,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
   // Мобильный макет
   if (isMobile) {
     return (
-      <div className="flex flex-col h-full pt-16 bg-black mobile-carousel-container overflow-y-auto">
+      <div className="flex flex-col h-full pt-16 bg-black mobile-carousel-container overflow-y-auto w-full overflow-x-hidden">
         {/* Параметры модели (на мобильных сверху) */}
         <div className="w-full">
           <ModelParams />
@@ -430,7 +430,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
         </div>
         
         {/* Контейнер карусели */}
-        <div className="relative flex-grow w-full mx-0 px-0" style={{ minHeight: '80vh' }}>
+        <div className="relative flex-grow w-full mx-0 px-0" style={{ minHeight: '100vh' }}>
           {/* Индикатор загрузки */}
           {!areImagesLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-black z-50" role="status" aria-label="Loading images">
@@ -484,7 +484,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
         </div>
         
         {/* Добавляем просто отступ внизу */}
-        <div className="w-full h-32"></div>
+        <div className="w-full h-48"></div>
       </div>
     );
   }

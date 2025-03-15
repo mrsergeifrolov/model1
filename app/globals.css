@@ -34,7 +34,7 @@ body {
   font-family: 'Helvetica Neue', var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   letter-spacing: 0.02em;
   font-weight: 300;
-  overflow: hidden; /* Убираем скролл */
+  overflow-x: hidden; /* Убираем только горизонтальный скролл */
   height: 100vh;
 }
 

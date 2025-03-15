@@ -85,7 +85,7 @@ export default function Home() {
   ];
 
   return (
-    <div className={`${isMobile ? 'flex flex-col' : ''} h-screen`}>
+    <div className={`${isMobile ? 'flex flex-col w-full overflow-x-hidden' : ''} h-screen`}>
       <DigitalsCarousel images={digitalImages} />
     </div>
   );
