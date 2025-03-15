@@ -46,6 +46,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
       
       const imagePromises = images.map((image, index) => {
         return new Promise<void>((resolve) => {
+          // Используем нативный объект Image для предзагрузки
           const img = new window.Image();
           console.log(`Загрузка изображения ${index + 1}/${images.length}:`, image.src);
           img.src = image.src;
@@ -56,6 +57,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
           };
           img.onerror = (e) => {
             console.error(`Ошибка загрузки изображения ${index + 1}:`, image.src, e);
+            // Даже при ошибке отмечаем изображение как "загруженное", чтобы не блокировать UI
             setImagesLoaded(prev => ({ ...prev, [image.src]: true }));
             resolve();
           };
@@ -63,6 +65,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
       });
       
       try {
+        // Запускаем все запросы параллельно для максимально быстрой загрузки
         await Promise.all(imagePromises);
         console.log('Все изображения обработаны');
       } catch (error) {
@@ -70,7 +73,13 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
       }
     };
     
-    preloadImages();
+    // Запускаем предзагрузку с небольшой задержкой после монтирования компонента
+    // Это позволяет браузеру сначала отрисовать UI
+    const timer = setTimeout(() => {
+      preloadImages();
+    }, 100);
+    
+    return () => clearTimeout(timer);
   }, [images]);
 
   // Обновляем видимость параметров модели при изменении страницы
@@ -347,7 +356,8 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
                 fill
                 className="object-contain object-center"
                 sizes="100vw"
-                priority={index === 0}
+                priority={true}
+                loading="eager"
               />
             </div>
           </div>
@@ -375,7 +385,8 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
                     fill
                     className="object-contain object-center"
                     sizes="50vw"
-                    priority={index === 1}
+                    priority={true}
+                    loading="eager"
                   />
                 </div>
               </div>
@@ -394,7 +405,8 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
                 fill
                 className="object-contain object-center"
                 sizes="50vw"
-                priority={index === 0}
+                priority={true}
+                loading="eager"
               />
             </div>
           </div>
