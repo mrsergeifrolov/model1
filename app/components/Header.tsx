@@ -31,7 +31,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-black shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isMobile ? 'bg-black shadow-md py-2' : (isScrolled ? 'bg-black shadow-md py-2' : 'bg-transparent py-4')}`}>
       <div className={`container mx-auto px-4 ${isMobile ? 'flex justify-center items-center' : 'flex justify-between items-center'}`}>
         {isMobile ? (
           <Link 

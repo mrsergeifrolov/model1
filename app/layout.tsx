@@ -2,7 +2,6 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Montserrat, Playfair_Display } from 'next/font/google';
 import Header from './components/Header';
-import Footer from './components/Footer';
 
 // Подключаем шрифты
 const montserrat = Montserrat({
@@ -37,7 +36,6 @@ export default function RootLayout({
       <body>
         <Header />
         <main>{children}</main>
-        <Footer />
       </body>
     </html>
   );

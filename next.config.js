@@ -13,8 +13,10 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     unoptimized: true,
   },
-  output: 'export',
-  distDir: 'out',
+  // Включаем статический экспорт только для продакшн сборки
+  // Для локальной разработки закомментируйте следующие строки
+  // output: 'export',
+  // distDir: 'out',
 };
 
 module.exports = nextConfig; 

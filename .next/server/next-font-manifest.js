@@ -1,1 +1,1 @@
-self.__NEXT_FONT_MANIFEST='{"pages":{},"app":{"/Users/sergeifrolov/IdeaProjects/model1/model1/app/layout":["static/media/6325a8417175c41d-s.p.woff2","static/media/4f05ba3a6752a328-s.p.woff2","static/media/ae80e08d9fcae03a-s.p.woff2","static/media/dcc209c0b1ab30af-s.p.woff2"]},"appUsingSizeAdjust":true,"pagesUsingSizeAdjust":false}';
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{},\"appUsingSizeAdjust\":false,\"pagesUsingSizeAdjust\":false}"

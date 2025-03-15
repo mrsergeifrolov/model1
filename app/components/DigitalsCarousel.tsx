@@ -167,22 +167,22 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
           <div className="inline-block mx-2">
             <span className="font-light uppercase" style={{ color: 'rgb(179, 179, 179)' }}>HEIGHT</span>
             <span className="mx-1">:</span>
-            <span style={{ color: 'rgb(153, 153, 153)' }}>170cm</span>
+            <span style={{ color: 'rgb(153, 153, 153)' }}>170cm / 5'7"</span>
           </div>
           <div className="inline-block mx-2">
             <span className="font-light uppercase" style={{ color: 'rgb(179, 179, 179)' }}>BUST</span>
             <span className="mx-1">:</span>
-            <span style={{ color: 'rgb(153, 153, 153)' }}>90cm</span>
+            <span style={{ color: 'rgb(153, 153, 153)' }}>90cm / 35.4"</span>
           </div>
           <div className="inline-block mx-2">
             <span className="font-light uppercase" style={{ color: 'rgb(179, 179, 179)' }}>WAIST</span>
             <span className="mx-1">:</span>
-            <span style={{ color: 'rgb(153, 153, 153)' }}>58cm</span>
+            <span style={{ color: 'rgb(153, 153, 153)' }}>58cm / 22.8"</span>
           </div>
           <div className="inline-block mx-2">
             <span className="font-light uppercase" style={{ color: 'rgb(179, 179, 179)' }}>HIPS</span>
             <span className="mx-1">:</span>
-            <span style={{ color: 'rgb(153, 153, 153)' }}>88cm</span>
+            <span style={{ color: 'rgb(153, 153, 153)' }}>88cm / 34.6"</span>
           </div>
           <div className="inline-block mx-2">
             <span className="font-light uppercase" style={{ color: 'rgb(179, 179, 179)' }}>HAIR</span>
@@ -418,7 +418,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
   // Мобильный макет
   if (isMobile) {
     return (
-      <div className="flex flex-col h-full pt-16 bg-black mobile-carousel-container">
+      <div className="flex flex-col h-full pt-16 bg-black mobile-carousel-container overflow-y-auto">
         {/* Параметры модели (на мобильных сверху) */}
         <div className="w-full">
           <ModelParams />
@@ -430,7 +430,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
         </div>
         
         {/* Контейнер карусели */}
-        <div className="relative flex-grow overflow-hidden w-full mx-0 px-0">
+        <div className="relative flex-grow w-full mx-0 px-0" style={{ minHeight: '80vh' }}>
           {/* Индикатор загрузки */}
           {!areImagesLoaded && (
             <div className="absolute inset-0 flex items-center justify-center bg-black z-50" role="status" aria-label="Loading images">
@@ -460,7 +460,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
             }
           `}</style>
           
-          <div className="relative h-full w-full overflow-hidden">
+          <div className="relative h-full w-full">
             {/* Отображаем все страницы */}
             {pages}
             
@@ -484,7 +484,7 @@ const DigitalsCarousel: React.FC<DigitalsCarouselProps> = ({ images }) => {
         </div>
         
         {/* Добавляем просто отступ внизу */}
-        <div className="w-full h-12"></div>
+        <div className="w-full h-32"></div>
       </div>
     );
   }
