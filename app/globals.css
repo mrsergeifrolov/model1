@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: local('Helvetica Neue'), local('HelveticaNeue'),
+       url('/fonts/HelveticaNeue.woff2') format('woff2'),
+       url('/fonts/HelveticaNeue.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: local('Helvetica Neue Light'), local('HelveticaNeue-Light'),
+       url('/fonts/HelveticaNeue-Light.woff2') format('woff2'),
+       url('/fonts/HelveticaNeue-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+  font-family: 'Helvetica Neue', var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+  overflow: hidden; /* Убираем скролл */
+  height: 100vh;
+}
+
+main {
+  height: 100vh;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Helvetica Neue', var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+}
+
+.section {
+  @apply py-12 md:py-16 lg:py-20;
+}
+
+.btn {
+  @apply px-6 py-2 rounded-none transition-all duration-300 inline-block uppercase text-xs tracking-widest font-medium;
+}
+
+.btn-primary {
+  @apply bg-white text-black hover:bg-gray-200;
+}
+
+.btn-outline {
+  @apply border border-white text-white hover:bg-white hover:text-black;
+}
+
+.gallery-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+}
+
+.nav-link {
+  @apply relative text-white hover:text-gray-300 transition-colors duration-300 uppercase text-xs tracking-widest;
+}
+
+.nav-link::after {
+  @apply content-[''] absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+.active-nav-link::after {
+  @apply w-full;
+}
+
+.carousel .control-dots .dot {
+  @apply bg-white;
+}
+
+.img-models-grid {
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1;
+}
+
+.img-models-card {
+  @apply relative overflow-hidden aspect-[3/4];
+}
+
+.img-models-card img {
+  @apply object-cover transition-transform duration-500;
+}
+
+.img-models-card:hover img {
+  @apply scale-105;
+}
+
+.img-models-info {
+  @apply absolute bottom-0 left-0 w-full p-4 bg-black bg-opacity-90;
+}
+
+.img-models-name {
+  @apply text-sm uppercase tracking-widest font-medium;
+}
+
+.carousel-dot {
+  @apply w-2 h-2 rounded-full bg-gray-600 transition-all duration-300;
+}
+
+.carousel-dot.active {
+  @apply bg-white;
+}
+
+.carousel-arrow {
+  @apply absolute top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-70 transition-all duration-300;
+}
+
+.model-params {
+  @apply absolute left-8 top-1/2 transform -translate-y-1/2 z-10 bg-black bg-opacity-90 p-6 max-w-xs;
+}
+
+/* Анимация для карусели */
+.translate-x-full {
+  transform: translateX(100%);
+}
+
+.-translate-x-full {
+  transform: translateX(-100%);
+}
+
+.translate-x-0 {
+  transform: translateX(0);
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 1.2s ease-in-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 1.2s ease-in-out forwards;
+}
+
+.animate-slide-out-right {
+  animation: slideOutRight 1.2s ease-in-out forwards;
+}
+
+.animate-slide-out-left {
+  animation: slideOutLeft 1.2s ease-in-out forwards;
+}
+
+/* Добавляем класс для длительности анимации */
+.duration-1200 {
+  transition-duration: 1200ms;
+}
+
+/* Пользовательские курсоры для карусели */
+.cursor-finger-left {
+  cursor: pointer;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 19l-7-7 7-7'/></svg>") 20 20, auto;
+}
+
+.cursor-finger-right {
+  cursor: pointer;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 5l7 7-7 7'/></svg>") 20 20, auto;
+} 
