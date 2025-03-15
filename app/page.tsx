@@ -25,61 +25,70 @@ export default function Home() {
     };
   }, []);
 
+  // Версия изображений - меняйте её при обновлении изображений
+  // Можно использовать дату сборки, хэш или любое другое значение
+  const IMAGE_VERSION = '20250316v1';
+  
+  // Функция для добавления версии к пути изображения
+  const getImagePath = (path: string) => {
+    return `${path}?v=${IMAGE_VERSION}`;
+  };
+
   // Массив с изображениями для карусели, отсортированный в числовом порядке
   const digitalImages = [
     {
       id: 1,
-      src: '/images/IMG_01.JPG',
+      src: getImagePath('/images/IMG_01.JPG'),
       alt: 'Sagadeeva Alina - digital photo 1',
     },
     {
       id: 2,
-      src: '/images/IMG_02.JPG',
+      src: getImagePath('/images/IMG_02.JPG'),
       alt: 'Sagadeeva Alina - digital photo 2',
     },
     {
       id: 3,
-      src: '/images/IMG_03.JPG',
+      src: getImagePath('/images/IMG_03.JPG'),
       alt: 'Sagadeeva Alina - digital photo 3',
     },
     {
       id: 4,
-      src: '/images/IMG_04.JPG',
+      src: getImagePath('/images/IMG_04.JPG'),
       alt: 'Sagadeeva Alina - digital photo 4',
     },
     {
       id: 5,
-      src: '/images/IMG_05.JPG',
+      src: getImagePath('/images/IMG_05.JPG'),
       alt: 'Sagadeeva Alina - digital photo 5',
     },
     {
       id: 6,
-      src: '/images/IMG_06.JPG',
+      src: getImagePath('/images/IMG_06.JPG'),
       alt: 'Sagadeeva Alina - digital photo 6',
     },
     {
       id: 7,
-      src: '/images/IMG_07.JPG',
+      src: getImagePath('/images/IMG_07.JPG'),
       alt: 'Sagadeeva Alina - digital photo 7',
     },
     {
       id: 8,
-      src: '/images/IMG_08.JPG',
+      src: getImagePath('/images/IMG_08.JPG'),
       alt: 'Sagadeeva Alina - digital photo 8',
     },
     {
       id: 9,
-      src: '/images/IMG_09.JPG',
+      src: getImagePath('/images/IMG_09.JPG'),
       alt: 'Sagadeeva Alina - digital photo 9',
     },
     {
       id: 10,
-      src: '/images/IMG_10.JPG',
+      src: getImagePath('/images/IMG_10.JPG'),
       alt: 'Sagadeeva Alina - digital photo 10',
     },
     {
       id: 11,
-      src: '/images/IMG_11.JPG',
+      src: getImagePath('/images/IMG_11.JPG'),
       alt: 'Sagadeeva Alina - digital photo 11',
     }
   ];
